@@ -8,3 +8,14 @@ app.listen(3000, () => {
 app.get("/", (req, res) => {
     res.status(200).send("Bem vido!");
 });
+
+let livros = {
+    "titulo": "O Senhor dos Anéis",
+    "autor": "J.R.R. Tolkien",
+    "ano": 1954,
+    "genero": "Fantasia"
+}
+
+app.get("/livro", (req, res) => {
+    res.status(200).send(livros);
+});
