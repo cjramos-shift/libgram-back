@@ -11,8 +11,16 @@ export async function buscarTodosPosts() {
     const db = conexao.db("imersao-libgram");
 
     // Obtém a coleção chamada "posts" do banco de dados
-    const colexao = db.collection("posts");
+    const colecao = db.collection("posts");
 
     // Usa o método 'find' para recuperar todos os documentos e convertê-los em um array
-    return colexao.find().toArray();
+    return colecao.find().toArray();
+}
+
+export async function salvaPost(body) {
+    const db = conexao.db("imersao-libgram");
+    const colecao = db.collection("posts");
+    console.log(body);
+    // Insere na coleção no Mongo
+    return colecao.insertOne(body);
 }
