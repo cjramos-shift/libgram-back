@@ -1,4 +1,6 @@
 // Importa a função para conectar ao banco de dados de um arquivo separado
+import { ObjectId } from "mongodb";
+import 'dotenv/config';
 import conectarAoBanco from "../config/dbConfig.js";
 
 // Estabelece uma conexão com o banco de dados usando a função importada e a string de conexão
@@ -20,7 +22,14 @@ export async function buscarTodosPosts() {
 export async function salvaPost(body) {
     const db = conexao.db("imersao-libgram");
     const colecao = db.collection("posts");
-    console.log(body);
     // Insere na coleção no Mongo
     return colecao.insertOne(body);
+}
+
+export async function atualizaPost(id, body) {
+    const db = conexao.db("imersao-libgram");
+    const colecao = db.collection("posts");
+    const objectId = ObjectId.createFromHexString(id);
+    // Atualiza na coleção no Mongo
+    return colecao.updateOne({ _id: new ObjectId(objectId) }, { $set: body });
 }
